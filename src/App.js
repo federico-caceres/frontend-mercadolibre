@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { searchProducts, getProductDetails } from './services';
-import logo from '../src/assets/img/logo.png';
 import { Row, Col, Container, Navbar, Card, Image, Button, Modal } from 'react-bootstrap';
+import NavBar from './components/NavBar/';
 
 function App() {
 
@@ -38,19 +38,7 @@ function App() {
   return (
     <div className="App">
 
-      <Navbar className="navbar">
-        <Container>
-          <Navbar.Brand href='#home'>
-            <img
-                src={logo}
-                width="300"
-                height="40"
-                className="d-inline-block align-top"
-                alt="React Bootstrap logo"
-              />
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+      <NavBar></NavBar>
 
       <div className="containerProducts">
         <div style={{ backgroundColor: 'white', padding: '20px' }}>
@@ -80,7 +68,7 @@ function App() {
                   </div>
                 </li>
                 ) 
-              : <p>Sin datos</p>
+              : <p>Sin datos de productos</p>
             }
           </ul>
         </div>
