@@ -1,14 +1,14 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { searchProducts, getProductDetails } from './services';
-import { Row, Col, Container, Navbar, Card, Image, Button, Modal } from 'react-bootstrap';
+import { Row, Col, Image, Button, Modal } from 'react-bootstrap';
 import NavBar from './components/NavBar/';
+import Product from './components/Product/';
 
 function App() {
 
   const [dataProducts, setDataProducts] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null);
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
 
   useEffect(() => {
@@ -22,7 +22,6 @@ function App() {
   const handleShowModal = async (productId) => {
     try {
       const productDetails = await getProductDetails(productId);
-      setSelectedProductId(productId);
       setSelectedProductDetails(productDetails);
       setShowModal(true);
     } catch (error) {
@@ -31,7 +30,6 @@ function App() {
   };
 
   const handleHideModal = () => {
-    setSelectedProductId(null);
     setShowModal(false);
   }  
 
@@ -49,22 +47,7 @@ function App() {
               ? dataProducts.map(item => 
                 <li key={item.id}>
                   <div>
-                    <Row className='my-4'>
-                      <Col>
-                        <Image src={item.thumbnail} alt="Descripción de la imagen" thumbnail style={{ width: '100px', height: '100px' }}/>
-                      </Col>
-                      <Col>
-                        <p>$ {item.price}</p>
-                        <p>{item.title}</p>
-                      </Col>
-                      <Col>
-                        <p>{item.seller_address.country.name}</p>
-                      </Col>
-                      <Col>
-                        <Button onClick={() => handleShowModal(item.id)}>Ver detalles</Button>
-                      </Col>
-                    </Row>
-                    
+                    <Product key={item.id} selectedProductDetails={item} handleShowModal={handleShowModal}></Product>                    
                   </div>
                 </li>
                 ) 
