@@ -16,15 +16,18 @@ export default function ProductModal(props){
                     {selectedProductDetails ? (
                     <>
                         <Row>
-                            <Col>
-                                <Image src={selectedProductDetails.pictures[0].url} alt="Descripción de la imagen" thumbnail style={{ width: '300px', height: '400px' }}/>
+                            <Col md={6} sm={12}>
+                                <Image src={selectedProductDetails.pictures[0].url} alt="Descripción de la imagen" style={{ width: '300px', height: '400px' }}/>
                             </Col>
-                            <Col>
-                                <p><b>Precio:</b> $ {selectedProductDetails.price}</p>
-                                <h5>Descripción del producto</h5>
+                            <Col md={6} sm={12}>
+                                <h3><b>Precio:</b> {selectedProductDetails.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</h3>
+                                <h5><b>Descripción del producto</b></h5>
                                 <p>{selectedProductDetails.description ? selectedProductDetails.description : 
                                 <div>Esto es una simulación en la descripción del producto</div>
                                 }</p>
+                                <Row>
+                                    <Button variant="primary" size="lg" block >Comprar</Button>
+                                </Row>
                             </Col>
                         </Row>
                     </>
@@ -32,9 +35,6 @@ export default function ProductModal(props){
                         <p>Cargando...</p>
                     )}
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleHideModal}>Cerrar</Button>
-                </Modal.Footer>
             </Modal>
         </div>
     )

@@ -40,15 +40,13 @@ function App() {
 
       <div className="containerProducts">
         <div style={{ backgroundColor: 'white', padding: '20px' }}>
-          <h2>Lista de productos</h2>
           <ul>
             { 
               (dataProducts) 
               ? dataProducts.map(item => 
                 <li key={item.id}>
-                  <div>
                     <Product key={item.id} selectedProductDetails={item} handleShowModal={handleShowModal}></Product>                    
-                  </div>
+                    <hr></hr>
                 </li>
                 ) 
               : <p>Sin datos de productos</p>
