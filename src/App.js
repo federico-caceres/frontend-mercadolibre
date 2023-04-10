@@ -4,20 +4,32 @@ import { searchProducts, getProductDetails } from './services';
 import NavBar from './components/NavBar/';
 import Product from './components/Product/';
 import ProductModal from './components/ProductModal/';
+import Search from './components/Search/';
 
 function App() {
 
   const [dataProducts, setDataProducts] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    async function fetchData() {
-      const result = await searchProducts();
-      setDataProducts(result);
+    if (searchTerm) {
+      searchProduct(searchTerm);
+    } else {
+      searchProduct('iphone');
     }
-    fetchData();
-  }, []);
+
+  }, [searchTerm]);
+
+  const handleSearchInputChange = (value) => {
+    setSearchTerm(value);
+  };
+
+  const searchProduct = async (text) => {
+    const result = await searchProducts(text);
+    setDataProducts(result);
+  }
 
   const handleShowModal = async (productId) => {
     try {
@@ -39,7 +51,10 @@ function App() {
       <NavBar></NavBar>
 
       <div className="containerProducts">
-        <div style={{ backgroundColor: 'white', padding: '20px' }}>
+        
+        <Search onSearchInputChange={handleSearchInputChange}></Search>
+        
+        <div className='productList' style={{ backgroundColor: 'white', padding: '20px'}}>
           <ul>
             { 
               (dataProducts) 

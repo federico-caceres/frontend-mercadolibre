@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const searchProducts = async () => {
+export const searchProducts = async (text) => {
     try {
-        const response = await axios.get(`http://localhost:3001/search?text=iphone`);
+        const response = await axios.get(`http://localhost:3001/search?text=${text}`);
         return response.data.results;
     } catch (error) {
         console.log(error);

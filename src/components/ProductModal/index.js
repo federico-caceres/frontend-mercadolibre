@@ -21,6 +21,7 @@ export default function ProductModal(props){
                             </Col>
                             <Col md={6} sm={12}>
                                 <h3><b>Precio:</b> {selectedProductDetails.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</h3>
+                                <h5><b>Cantidad:</b> {selectedProductDetails.available_quantity}</h5>
                                 <h5><b>Descripción del producto</b></h5>
                                 <p>{selectedProductDetails.description ? selectedProductDetails.description : 
                                 <div>Esto es una simulación en la descripción del producto</div>
